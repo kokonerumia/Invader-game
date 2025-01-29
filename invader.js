@@ -92,7 +92,9 @@ const ENEMY_TYPES = {
 };
 
 function getEnemyHealth(type, stage) {
-    return ENEMY_TYPES[type].baseHealth + Math.floor((stage - 1) / 2);
+    const baseIncrease = Math.max(0, stage - 2) * 3;  // Significant increase from stage 3
+    const exponentialIncrease = Math.max(0, stage - 5) * 2;  // Even more increase from stage 6
+    return ENEMY_TYPES[type].baseHealth + baseIncrease + exponentialIncrease;
 }
 
 function createBullet(angle = 0) {
@@ -104,7 +106,7 @@ function createBullet(angle = 0) {
         height: 20,
         speed: BULLET_SPEED + Math.min(powerLevel, 10),
         dx: Math.sin(angle) * (BULLET_SPEED + Math.min(powerLevel, 10)) * 0.5,
-        damage: 1 + Math.floor(powerLevel / 5)
+        damage: 1 + Math.floor(powerLevel / 8)  // Reduced damage scaling
     };
 }
 
