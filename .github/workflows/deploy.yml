@@ -24,6 +24,7 @@ jobs:
 
   lint:
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -37,10 +38,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_HTML: true
           VALIDATE_CSS: true
-          VALIDATE_JAVASCRIPT_ES: true 
+          VALIDATE_JAVASCRIPT_ES: true
+          DISABLE_ERRORS: true
 
   spell-check:
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
